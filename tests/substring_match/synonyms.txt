@@ -1,0 +1,5 @@
+pkw, auto, automobil
+opel => pkw
+audi => pkw
+mercedes => pkw
+ford => pkw

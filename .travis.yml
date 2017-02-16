@@ -1,0 +1,20 @@
+language: python
+python: 2.7
+sudo: false
+cache:
+  pip: true
+  directories:
+    - $HOME/downloads
+    - /home/travis/build/tisto/solr-testing/downloads
+env:
+  - SOLR_VERSION=6.4.1
+#matrix:
+#  allow_failures:
+#    - env: SOLR_VERSION=5.0.0
+before_install:
+  - mkdir -p $HOME/downloads
+  - sed -ie "s#SOLR_VERSION := 4.5.1#SOLR_VERSION := $SOLR_VERSION#" Makefile
+install:
+  - make
+script:
+  - make test

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<schema name="substring_match" version="1.5">
+
+  <uniqueKey>id</uniqueKey>
+  <defaultSearchField>id</defaultSearchField>
+
+  <types>
+    <fieldType name="string" class="solr.StrField" />
+
+    <fieldType name="substring_match" class="solr.TextField">
+      <analyzer type="index">
+
+        <!-- Replace non-ascii characters into ascii equivalent.
+             A later filter won't work since the KeywordTokenizer treats the
+             entire field as a single keyword.
+        -->
+        <charFilter class="solr.MappingCharFilterFactory"
+                    mapping="mapping-FoldToASCII.txt"
+                    />
+
+        <!-- Splits the text field into tokens, treating whitespace and
+             punctuation as delimiters. -->
+        <tokenizer class="solr.StandardTokenizerFactory"/>
+
+        <!-- Lowercases the letters in each token. -->
+        <filter class="solr.LowerCaseFilterFactory" />
+
+        <!-- Create Ngrams to find prefix substrings. -->
+        <filter class="solr.EdgeNGramFilterFactory" maxGramSize="20" minGramSize="2" />
+
+        <!-- Trims whitespace at either end of a token. -->
+        <filter class="solr.TrimFilterFactory" />
+
+      </analyzer>
+      <analyzer type="query">
+
+        <!-- Replace non-ascii characters into ascii equivalent.
+             A later filter won't work since the KeywordTokenizer treats the
+             entire field as a single keyword.
+        -->
+        <charFilter class="solr.MappingCharFilterFactory"
+                    mapping="mapping-FoldToASCII.txt"
+                    />
+
+        <!-- Splits the text field into tokens, treating whitespace and
+             punctuation as delimiters. -->
+        <tokenizer class="solr.StandardTokenizerFactory"/>
+
+        <!-- Lowercases the letters in each token. -->
+        <filter class="solr.LowerCaseFilterFactory" />
+
+        <!-- Trims whitespace at either end of a token. -->
+        <filter class="solr.TrimFilterFactory" />
+
+      </analyzer>
+    </fieldType>
+  </types>
+
+  <fields>
+    <field name="id" type="string" indexed="true" stored="true" required="true" />
+    <field name="title" type="substring_match" indexed="true" stored="true" required="false" />
+    <field name="periodical_article" type="substring_match" indexed="true" stored="true" required="false" />
+    <field name="periodical_full_name" type="substring_match" indexed="true" stored="true" required="false" />
+    <field name="year" type="string" indexed="true" stored="true" required="false" />
+    <field name="archive" type="string" indexed="true" stored="true" required="false" />
+    <field name="substring_match" type="substring_match" indexed="true" stored="true" />
+    <dynamicField name="*"  type="string"  indexed="true"  stored="true" />
+  </fields>
+
+</schema>
