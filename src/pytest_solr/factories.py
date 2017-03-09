@@ -46,7 +46,7 @@ def solr_core(process_fixture_name, solr_core_name='test'):
 
         solr_executable = process.command_parts[0]
         solr_core_directory = 'tests/substring_match'
-        solr_port = '18983'
+        solr_port = str(process.port)
 
         subprocess.check_output(
             [
