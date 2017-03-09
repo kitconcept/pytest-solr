@@ -5,23 +5,22 @@ from mirakuru import HTTPExecutor
 
 
 def solr_proc(
-    executable='bin/solr -f -p 18983',
+    executable='downloads/solr-6.4.1/bin/solr',
     host='localhost',
     port=18983,
     core='solr',
+    timeout=60
 ):
 
     @pytest.fixture(scope='session')
     def solr_proc_fixture(request):
-
-        command_exec = 'downloads/solr-6.4.1/bin/solr -f -p 18983'
         solr_executor = HTTPExecutor(
-            command_exec,
+            '{} -f -p {}'.format(executable, port),
             'http://{host}:{port}/solr/'.format(
                 host=host,
                 port=port
             ),
-            timeout=60,
+            timeout=timeout,
         )
 
         solr_executor.start()
