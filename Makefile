@@ -23,6 +23,7 @@ virtualenv:
 		virtualenv $(CURRENT_DIR)/.env; \
 		source $(CURRENT_DIR)/.env/bin/activate; \
 		pip install -r requirements.txt; \
+		python setup.py develop \
 	else \
 		echo "Skip creating virtualenv."; \
 	fi

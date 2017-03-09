@@ -16,5 +16,6 @@ before_install:
   - sed -ie "s#SOLR_VERSION := 4.5.1#SOLR_VERSION := $SOLR_VERSION#" Makefile
 install:
   - make bootstrap
+  - make virtualenv
 script:
-  - py.test tests
+  - make test
