@@ -37,7 +37,7 @@ def solr_proc(
     return solr_proc_fixture
 
 
-def solr_core(process_fixture_name):
+def solr_core(process_fixture_name, solr_core_name='test'):
 
     @pytest.fixture
     def solr_core_fixture(request):
@@ -46,7 +46,6 @@ def solr_core(process_fixture_name):
             process.start()
 
         solr_executable = 'downloads/solr-6.4.1/bin/solr'
-        solr_core_name = 'test'
         solr_core_directory = 'tests/substring_match'
 
         subprocess.check_output(
