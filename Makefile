@@ -12,7 +12,7 @@ bootstrap:
 		echo "Skip downloading Solr."; \
 	fi;
 	@if [[ ! -d $(CURRENT_DIR)/downloads/solr-$(SOLR_VERSION)  ]]; then \
-		tar xfvz $(CURRENT_DIR)/downloads/solr-$(SOLR_VERSION).tgz -C $(CURRENT_DIR)/downloads; \
+		tar xfz $(CURRENT_DIR)/downloads/solr-$(SOLR_VERSION).tgz -C $(CURRENT_DIR)/downloads; \
 	else \
 		echo "Skip extracting Solr."; \
 	fi
