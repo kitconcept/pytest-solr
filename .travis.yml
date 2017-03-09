@@ -15,6 +15,6 @@ before_install:
   - mkdir -p $HOME/downloads
   - sed -ie "s#SOLR_VERSION := 4.5.1#SOLR_VERSION := $SOLR_VERSION#" Makefile
 install:
-  - make
+  - make bootstrap
 script:
-  - make test
+  - py.test tests
