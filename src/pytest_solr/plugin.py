@@ -34,6 +34,6 @@ def pytest_addoption(parser):
     )
 
 
-solr_proc = factories.solr_proc()
-solr_core = factories.solr_core('solr_proc')
+solr_process = factories.solr_process()
+solr_core = factories.solr_core('solr_process')
 solr = factories.solr('solr_core')
