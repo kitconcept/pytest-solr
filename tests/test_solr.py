@@ -1,4 +1,3 @@
-from pytest_solr import factories
 from pytest_solr.factories import solr_proc
 from pytest_solr.factories import solr_core
 from pytest_solr.factories import solr
