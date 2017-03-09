@@ -1,3 +1,9 @@
+from pytest_solr import factories
+from pytest_solr.factories import solr_proc
+from pytest_solr.factories import solr_core
+from pytest_solr.factories import solr
+
+
 def test_solr_process(solr_proc):
     assert solr_proc.running() is True
 
@@ -8,9 +14,3 @@ def test_solr_core(solr_core):
 
 def test_solr(solr):
     assert 0 == solr.search('bananas').hits
-
-
-# def test_solr_process_is_running(solr_proc):
-#     solr_process_status = solr_proc.poll()
-#     assert solr_process_status > 0
-
