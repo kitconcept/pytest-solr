@@ -44,7 +44,7 @@ def solr_core(process_fixture_name, solr_core_name='test'):
         if not process.running():
             process.start()
 
-        solr_executable = 'downloads/solr-6.4.1/bin/solr'
+        solr_executable = process.command_parts[0]
         solr_core_directory = 'tests/substring_match'
 
         subprocess.check_output(
