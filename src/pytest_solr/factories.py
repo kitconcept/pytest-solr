@@ -4,7 +4,7 @@ import subprocess
 from mirakuru import HTTPExecutor
 
 
-def solr_proc(
+def solr_process(
     executable='downloads/solr-6.4.1/bin/solr',
     host='localhost',
     port=18983,
@@ -13,7 +13,7 @@ def solr_proc(
 ):
 
     @pytest.fixture(scope='session')
-    def solr_proc_fixture(request):
+    def solr_process_fixture(request):
         solr_executor = HTTPExecutor(
             '{} -f -p {}'.format(executable, port),
             'http://{host}:{port}/solr/'.format(
@@ -33,7 +33,7 @@ def solr_proc(
 
         return solr_executor
 
-    return solr_proc_fixture
+    return solr_process_fixture
 
 
 def solr_core(process_fixture_name, solr_core_name='test'):
