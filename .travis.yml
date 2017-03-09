@@ -14,16 +14,11 @@ env:
 #  allow_failures:
 #    - env: SOLR_VERSION=5.0.0
 before_install:
-  - sudo apt-get -y install python3-pip python-dev
-  - sudo pip3 install -U setuptools
-  - sudo pip3 install -U virtualenvwrapper
-  - python3 -V
-  - pip3 -V
   - mkdir -p $HOME/downloads
   - sed -ie "s#SOLR_VERSION := 4.5.1#SOLR_VERSION := $SOLR_VERSION#" Makefile
 install:
   - make bootstrap
-  - pip3 install -r requirements.txt
-  - python setup.py develop
+  - sudo pip install -r requirements.txt
+  - sudo python setup.py develop
 script:
   - py.test tests/
