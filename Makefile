@@ -2,7 +2,7 @@ SHELL := /bin/bash
 SOLR_VERSION := 6.4.1
 CURRENT_DIR:=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 
-all: bootstrap virtualenv
+all: bootstrap virtualenv test
 
 bootstrap:
 	@echo "Bootstrap"
