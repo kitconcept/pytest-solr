@@ -36,7 +36,7 @@ def solr_process(
     return solr_process_fixture
 
 
-def solr_core(process_fixture_name, solr_core_name='test'):
+def solr_core(process_fixture_name, solr_core_name='substring_match'):
 
     @pytest.fixture
     def solr_core_fixture(request):
@@ -80,11 +80,11 @@ def solr_core(process_fixture_name, solr_core_name='test'):
     return solr_core_fixture
 
 
-def solr(process_fixture_name):
+def solr(process_fixture_name, documents=[]):
 
     @pytest.fixture
     def solr_fixture(request):
-        solr_core = 'test'
+        solr_core = 'substring_match'
         process = request.getfixturevalue(process_fixture_name)
         if not process.running():
             process.start()
@@ -96,6 +96,8 @@ def solr(process_fixture_name):
                 solr_core
             )
         )
+
+        client.add(documents)
 
         def drop_indexes():
             client.delete(q='*:*')
