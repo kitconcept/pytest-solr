@@ -3,3 +3,4 @@ opel => pkw
 audi => pkw
 mercedes => pkw
 ford => pkw
+bananas => fruits
