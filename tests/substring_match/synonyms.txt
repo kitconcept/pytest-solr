@@ -1,6 +1,3 @@
 pkw, auto, automobil
-opel => pkw
-audi => pkw
-mercedes => pkw
-ford => pkw
-bananas, fruits
+pkw => mercedes, opel, audi
+fruits => bananas, apples

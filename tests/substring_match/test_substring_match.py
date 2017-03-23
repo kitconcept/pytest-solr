@@ -7,7 +7,9 @@ solr_custom = solr(
     'solr_core_custom', 
     [
         {'id': '1', 'title': 'bananas'},
-        {'id': '2', 'title': 'Colorless Green Ideas Sleep Furiously'}
+        {'id': '2', 'title': 'apples'},
+        {'id': '3', 'title': 'fruits'},
+        {'id': '4', 'title': 'Colorless Green Ideas Sleep Furiously'}
     ]
 )
 
@@ -20,8 +22,11 @@ def test_prefix_match(solr_custom):
 # def test_suffix_match(solr_custom):
 #     assert 1 == solr_custom.search('title:nas').hits
 
-def test_synonyms(solr_custom):
-    assert 1 == solr_custom.search('title:fruits').hits
+def test_synonyms_apples_bananas_are_fruits(solr_custom):
+    assert 2 == solr_custom.search('title:fruits').hits
+
+def test_synonyms_fruits_are_not_apples(solr_custom):
+    assert 1 == solr_custom.search('title:apples').hits
 
 # def test_stopwords(solr_custom):
 #    assert 0 == solr_custom.search('title:and').hits
