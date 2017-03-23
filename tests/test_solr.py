@@ -19,3 +19,4 @@ solr_custom = solr('solr_core_custom', [{'id': '1', 'title': 'bananas'}])
 
 def test_solr_core_custom(solr_custom):
     assert 1 == solr_custom.search('title:bananas').hits
+
