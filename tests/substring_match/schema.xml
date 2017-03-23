@@ -58,6 +58,11 @@
         <!-- Lowercases the letters in each token. -->
         <filter class="solr.LowerCaseFilterFactory" />
 
+        <!-- Stopwords -->
+        <filter class="solr.StopFilterFactory"
+                ignoreCase="true"
+                words="stopwords.txt" />
+
         <!-- Trims whitespace at either end of a token. -->
         <filter class="solr.TrimFilterFactory" />
 
