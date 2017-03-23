@@ -43,9 +43,10 @@ def test_synonyms_apples_bananas_are_fruits(solr_fruits):
 #     query = 'Colorless Green Ideas Sleep Furiously'
 
 
-# def test_search_ignores_punctuation(solr):
-#     index = 'Colorless, Green; Ideas. Sleep? Furiously!'
-#     query = 'Colorless Green Ideas Sleep Furiously'
+# solr_punctuation = solr('solr_core_custom', [{'id': '1', 'title': 'Colorless, Green; Ideas. Sleep? Furiously!'}])
+# def test_search_ignores_punctuation(solr_punctuation):
+#     assert 1 == solr_punctuation.search('Colorless Green Ideas Sleep Furiously').hits
+
 
 # def test_search_ignores_whitespace(solr):
 #     index = '  Colorless Green Ideas Sleep Furiously         '
