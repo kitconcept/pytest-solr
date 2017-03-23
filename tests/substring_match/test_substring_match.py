@@ -9,10 +9,12 @@ solr_custom = solr(
         {'id': '1', 'title': 'bananas'},
         {'id': '2', 'title': 'apples'},
         {'id': '3', 'title': 'fruits'},
-        {'id': '4', 'title': 'Colorless Green Ideas Sleep Furiously'}
+        {'id': '4', 'title': 'Colorless Green Ideas Sleep Furiously'},
+        {'id': '5', 'title': 'Cölorless Grêen Idéaß Slèep Furiously'}
     ]
 )
 
+# @solr('solr_core_custom', {'id': '1', 'title': 'bananas'})
 def test_term_match(solr_custom):
     assert 1 == solr_custom.search('title:bananas').hits
 
@@ -25,8 +27,8 @@ def test_prefix_match(solr_custom):
 def test_synonyms_apples_bananas_are_fruits(solr_custom):
     assert 2 == solr_custom.search('title:fruits').hits
 
-def test_synonyms_fruits_are_not_apples(solr_custom):
-    assert 1 == solr_custom.search('title:apples').hits
+# def test_synonyms_fruits_are_not_apples(solr_custom):
+#     assert 1 == solr_custom.search('title:apples').hits
 
 # def test_stopwords(solr_custom):
 #    assert 0 == solr_custom.search('title:and').hits
@@ -66,9 +68,7 @@ def test_synonyms_fruits_are_not_apples(solr_custom):
 
 
 # def test_search_ignores_special_characters(solr):
-#     index = u'Colorless Green-Ideas Sleep=Furiously #?/[]()'
-#     query = u'Colorless Green Ideas Sleep Furiously'
-
+#     assert 2 == solr_custom.search('title:Colorless Green Ideas Sleep Furiously').hits
 
 # def test_search_finds_prefix(solr):
 
