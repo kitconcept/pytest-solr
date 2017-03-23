@@ -23,14 +23,6 @@
              punctuation as delimiters. -->
         <tokenizer class="solr.StandardTokenizerFactory"/>
 
-        <!-- Synonyms -->
-        <filter class="solr.SynonymFilterFactory"
-                synonyms="synonyms.txt"
-                format="solr"
-                ignoreCase="true"
-                expand="false"
-                />
-
         <!-- Lowercases the letters in each token. -->
         <filter class="solr.LowerCaseFilterFactory" />
 
@@ -54,6 +46,14 @@
         <!-- Splits the text field into tokens, treating whitespace and
              punctuation as delimiters. -->
         <tokenizer class="solr.StandardTokenizerFactory"/>
+
+        <!-- Synonyms -->
+        <filter class="solr.SynonymFilterFactory"
+                synonyms="synonyms.txt"
+                format="solr"
+                ignoreCase="true"
+                expand="false"
+                />
 
         <!-- Lowercases the letters in each token. -->
         <filter class="solr.LowerCaseFilterFactory" />

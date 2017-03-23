@@ -20,8 +20,11 @@ def test_prefix_match(solr_custom):
 # def test_suffix_match(solr_custom):
 #     assert 1 == solr_custom.search('title:nas').hits
 
-# def test_synonyms(solr_custom):
-#     assert 1 == solr_custom.search('title:fruits').hits
+def test_synonyms(solr_custom):
+    assert 1 == solr_custom.search('title:fruits').hits
+
+# def test_stopwords(solr_custom):
+#    assert 0 == solr_custom.search('title:and').hits
 
 # def test_uppercase(solr_custom):
 #     assert 1 == solr_custom.search('title:Bananas').hits
