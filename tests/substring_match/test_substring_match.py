@@ -43,9 +43,9 @@ def test_synonyms_apples_bananas_are_fruits(solr_fruits):
 #     query = 'Colorless Green Ideas Sleep Furiously'
 
 
-solr_punctuation = solr('solr_core_custom', [{'id': '1', 'title': 'Colorless, Green; Ideas. Sleep? Furiously!'}])
-def test_search_ignores_punctuation(solr_punctuation):
-    assert 1 == solr_punctuation.search('title:Colorless Green Ideas Sleep Furiously').hits
+# solr_punctuation = solr('solr_core_custom', [{'id': '1', 'title': 'Colorless, Green; Ideas. Sleep? Furiously!'}])
+# def test_search_ignores_punctuation(solr_punctuation):
+#     assert 1 == solr_punctuation.search('Colorless Green Ideas Sleep Furiously').hits
 
 
 # def test_search_ignores_whitespace(solr):
@@ -58,9 +58,10 @@ def test_search_ignores_punctuation(solr_punctuation):
 #     query = 'Colorless Green Ideas Sleep Furiously'
 
 
-solr_non_ascii = solr('solr_core_custom', [{'id': '1', 'title': 'Cölorless Grêen Idéaß Slèep Furiously'}])
-def test_search_replaces_non_ascii_characters(solr_non_ascii):
-    assert 1 == solr_non_ascii.search('title:Colorless Green Ideas Sleep Furiously').hits
+# def test_search_replaces_non_ascii_characters(solr):
+#     index = u'Cölorless Grêen Idéaß Slèep Furiously'
+#     query = u'Colorless Green Ideass Sleep Furiously'
+#     assert 1 == solr_custom.search(u'title:Cölorless Grêen Idéaß Slèep Furiously').hits
 
 
 # def test_search_ignores_special_characters(solr):
