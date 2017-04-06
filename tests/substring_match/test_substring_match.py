@@ -3,25 +3,30 @@ from pytest_solr.factories import solr_core
 from pytest_solr.factories import solr
 
 solr_core_custom = solr_core('solr_process', 'substring_match')
+solr = solr('solr_core_custom')
 
-# @solr('solr_core_custom', [{'id': '1', 'title': 'bananas'}])
-solr_bananas = solr('solr_core_custom', [{'id': '1', 'title': 'bananas'}])
-def test_term_match(solr_bananas):
-    assert 1 == solr_bananas.search('title:bananas').hits
 
-solr_bananas = solr('solr_core_custom', [{'id': '1', 'title': 'bananas'}])
-def test_prefix_match(solr_bananas):
-    assert 1 == solr_bananas.search('title:ban').hits
+def test_term_match(solr):
+    solr.add([{'id': '1', 'title': 'bananas'}])
+    assert 1 == solr.search('title:bananas').hits
 
-# def test_suffix_match(solr_custom):
-#     assert 1 == solr_custom.search('title:nas').hits
 
-solr_fruits = solr('solr_core_custom', [
-    {'id': '1', 'title': 'bananas'},
-    {'id': '2', 'title': 'apples'}
-])
-def test_synonyms_apples_bananas_are_fruits(solr_fruits):
-    assert 2 == solr_fruits.search('title:fruits').hits
+def test_prefix_match(solr):
+    solr.add([{'id': '1', 'title': 'bananas'}])
+    assert 1 == solr.search('title:ban').hits
+
+
+# def test_suffix_match(solr):
+#     solr.add([{'id': '1', 'title': 'bananas'}])
+#     assert 1 == solr.search('title:nas').hits
+
+
+def test_synonyms_apples_bananas_are_fruits(solr):
+    solr.add([
+        {'id': '1', 'title': 'bananas'},
+        {'id': '2', 'title': 'apples'}
+    ])
+    assert 2 == solr.search('title:fruits').hits
 
 # def test_synonyms_fruits_are_not_apples(solr_custom):
 #     assert 1 == solr_custom.search('title:apples').hits
