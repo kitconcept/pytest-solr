@@ -16,8 +16,9 @@ def test_solr(solr):
 
 
 solr_core_custom = solr_core('solr_process', 'substring_match')
-solr_custom = solr('solr_core_custom', [{'id': '1', 'title': 'bananas'}])
+solr_custom = solr('solr_core_custom')
 
 
 def test_solr_core_custom(solr_custom):
+    solr_custom.add([{'id': '1', 'title': 'bananas'}])
     assert 1 == solr_custom.search('title:bananas').hits

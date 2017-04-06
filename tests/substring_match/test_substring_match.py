@@ -2,11 +2,11 @@
 from pytest_solr.factories import solr_core
 from pytest_solr.factories import solr
 
-solr_core_custom = solr_core('solr_process', 'substring_match')
-solr = solr('solr_core_custom')
+substring_match = solr_core('solr_process', 'substring_match')
+solr = solr('substring_match')
 
 
-def test_term_match(solr):
+def test_exact_term_match(solr):
     solr.add([{'id': '1', 'title': 'bananas'}])
     assert 1 == solr.search('title:bananas').hits
 
@@ -20,37 +20,42 @@ def test_prefix_match(solr):
 #     solr.add([{'id': '1', 'title': 'bananas'}])
 #     assert 1 == solr.search('title:nas').hits
 
-
-def test_synonyms_apples_bananas_are_fruits(solr):
-    solr.add([
-        {'id': '1', 'title': 'bananas'},
-        {'id': '2', 'title': 'apples'}
-    ])
-    assert 2 == solr.search('title:fruits').hits
-
-# def test_synonyms_fruits_are_not_apples(solr_custom):
-#     assert 1 == solr_custom.search('title:apples').hits
-
-# def test_stopwords(solr_custom):
-#    assert 0 == solr_custom.search('title:and').hits
-
-# def test_uppercase(solr_custom):
-#     assert 1 == solr_custom.search('title:Bananas').hits
-
-# def test_exact_match(solr):
-#     assert 1 == solr_custom.search('title:Bananas').hits
-
 # def test_search_ignores_lowercase(solr):
-#     assert 1 == solr_custom.search('title:colorless green ideas sleep furiously').hits
+#     solr.add([{'id': '1', 'title': 'Bananas'}])
+#     assert 1 == solr.search('title:bananas').hits
 
 # def test_search_ignores_uppercase(solr):
-#     index = 'colorless green ideas sleep furiously'
-#     query = 'Colorless Green Ideas Sleep Furiously'
+#     solr.add([{'id': '1', 'title': 'bananas'}])
+#     assert 1 == solr.search('title:Bananas').hits
+
+# def test_synonyms_apples_and_bananas_are_fruits(solr):
+#     solr.add([
+#         {'id': '1', 'title': 'bananas'},
+#         {'id': '2', 'title': 'apples'}
+#     ])
+#     assert 2 == solr.search('title:fruits').hits
 
 
-# solr_punctuation = solr('solr_core_custom', [{'id': '1', 'title': 'Colorless, Green; Ideas. Sleep? Furiously!'}])
-# def test_search_ignores_punctuation(solr_punctuation):
-#     assert 1 == solr_punctuation.search('Colorless Green Ideas Sleep Furiously').hits
+# def test_synonyms_fruits_are_not_apples(solr):
+#     solr.add([{'id': '1', 'title': 'fruits'}])
+#     assert 0 == solr.search('title:apples').hits
+
+
+# def test_search_ignores_stopwords(solr):
+#     solr.add([{'id': '1', 'title': 'apples and bananas'}])
+#     assert 0 == solr.search('title:and').hits
+
+
+# def test_search_ignores_punctuation(solr):
+#     solr.add([
+#         {'id': '1', 'title': 'Colorless, Green; Ideas. Sleep? Furiously!'}
+#     ])
+#     assert 1 == solr.search('title:Colorless Green Ideas Sleep Furiously').hits
+
+
+# def test_search_replaces_non_ascii_characters(solr):
+#     solr.add([{'id': '1', 'title': u'Cölorless Grêen Idéaß Slèep Furiously'}])
+#     assert 1 == solr.search('title:Colorless Green Ideass Sleep Furiously').hits  # noqa
 
 
 # def test_search_ignores_whitespace(solr):
@@ -61,18 +66,6 @@ def test_synonyms_apples_bananas_are_fruits(solr):
 # def test_search_ignores_inner_whitespace(solr):
 #     index = 'Colorless    Green Ideas Sleep Furiously'
 #     query = 'Colorless Green Ideas Sleep Furiously'
-
-
-# def test_search_replaces_non_ascii_characters(solr):
-#     index = u'Cölorless Grêen Idéaß Slèep Furiously'
-#     query = u'Colorless Green Ideass Sleep Furiously'
-#     assert 1 == solr_custom.search(u'title:Cölorless Grêen Idéaß Slèep Furiously').hits
-
-
-# def test_search_ignores_special_characters(solr):
-#     assert 2 == solr_custom.search('title:Colorless Green Ideas Sleep Furiously').hits
-
-# def test_search_finds_prefix(solr):
 
 
 # def test_substring_finds_prefix_in_phrase(solr):
