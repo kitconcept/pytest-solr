@@ -48,18 +48,19 @@ def solr_core(process_fixture_name, solr_core_name='substring_match'):
         solr_core_directory = 'tests/substring_match'
         solr_port = str(process.port)
 
-        subprocess.check_output(
-            [
-                solr_executable,
-                'create_core',
-                '-p',
-                solr_port,
-                '-c',
-                solr_core_name,
-                '-d',
-                solr_core_directory
-            ],
-        )
+        def create_solr_colr():
+            subprocess.check_output(
+                [
+                    solr_executable,
+                    'create_core',
+                    '-p',
+                    solr_port,
+                    '-c',
+                    solr_core_name,
+                    '-d',
+                    solr_core_directory
+                ],
+            )
 
         def drop_solr_core():
             subprocess.check_output(
@@ -72,6 +73,12 @@ def solr_core(process_fixture_name, solr_core_name='substring_match'):
                     solr_core_name,
                 ],
             )
+
+        try:
+            create_solr_colr()
+        except subprocess.CalledProcessError:
+            drop_solr_core()
+            create_solr_colr()
 
         request.addfinalizer(drop_solr_core)
 
