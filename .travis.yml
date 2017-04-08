@@ -10,6 +10,7 @@ cache:
     - /home/travis/build/tisto/solr-testing/downloads
 env:
   - SOLR_VERSION=6.4.1
+  - SOLR_VERSION=6.5.0
 #matrix:
 #  allow_failures:
 #    - env: SOLR_VERSION=5.0.0
