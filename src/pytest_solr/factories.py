@@ -5,7 +5,7 @@ from mirakuru import HTTPExecutor
 
 
 def solr_process(
-    executable='downloads/solr-6.4.1/bin/solr',
+    executable='downloads/solr-6.5.0/bin/solr',
     host='localhost',
     port=18983,
     core='solr',
