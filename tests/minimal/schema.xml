@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<schema name="minimal" version="1.5">
+
+  <uniqueKey>id</uniqueKey>
+  <defaultSearchField>id</defaultSearchField>
+
+  <types>
+    <fieldType name="string" class="solr.StrField" />
+    <fieldType name="long" class="solr.TrieLongField" precisionStep="0" positionIncrementGap="0"/>
+  </types>
+
+  <fields>
+
+    <field name="_version_" type="long" indexed="true" stored="true"/>
+
+    <field
+      name="id"
+      type="string"
+      indexed="true"
+      stored="true"
+      required="true" />
+    <field
+      name="title"
+      type="string"
+      indexed="true"
+      stored="true"
+      required="false" />
+
+    <dynamicField name="*"  type="string"  indexed="true" stored="true" />
+  </fields>
+
+</schema>
