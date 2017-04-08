@@ -52,7 +52,7 @@ def solr_core(process_fixture_name, solr_core_name='substring_match'):
             process.start()
 
         solr_executable = process.command_parts[0]
-        solr_core_directory = 'tests/substring_match'
+        solr_core_directory = 'tests/{}'.format(solr_core_name)
         solr_port = str(process.port)
 
         def create_solr_colr():
@@ -98,7 +98,7 @@ def solr(process_fixture_name, documents=[]):
 
     @pytest.fixture
     def solr_fixture(request):
-        solr_core = 'substring_match'
+        solr_core = process_fixture_name
         process = request.getfixturevalue(process_fixture_name)
         if not process.running():
             process.start()
