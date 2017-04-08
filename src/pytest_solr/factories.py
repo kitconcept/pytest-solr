@@ -1,3 +1,4 @@
+import os
 import pysolr
 import pytest
 import subprocess
@@ -5,7 +6,7 @@ from mirakuru import HTTPExecutor
 
 
 def solr_process(
-    executable='downloads/solr-6.5.0/bin/solr',
+    executable=None,
     host='localhost',
     port=18983,
     core='solr',
@@ -14,8 +15,14 @@ def solr_process(
 
     @pytest.fixture(scope='session')
     def solr_process_fixture(request):
+        if not os.environ.get('SOLR_VERSION'):
+            solr_version = '6.5.0'
+        else:
+            solr_version = os.environ['SOLR_VERSION']
+        if not executable:
+            local_executable = 'downloads/solr-{}/bin/solr'.format(solr_version)  # noqa
         solr_executor = HTTPExecutor(
-            '{} -f -p {}'.format(executable, port),
+            '{} -f -p {}'.format(executable or local_executable, port),
             'http://{host}:{port}/solr/'.format(
                 host=host,
                 port=port
