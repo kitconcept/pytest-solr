@@ -31,6 +31,8 @@ virtualenv:
 clean:
 	@echo "Clean"
 	rm -rf .env
+	find . -name "*.pyc" -exec rm -rf {} \;
+	find . -name "__pycache__" -exec rm -rf {} \;
 
 test:
 	@echo "Run Tests"
