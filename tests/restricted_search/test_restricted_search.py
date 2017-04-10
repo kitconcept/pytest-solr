@@ -9,8 +9,11 @@ solr = solr('restricted_search')
 
 
 def test_edismax_query(solr):
-    solr.add([{'id': '1', 'title': 'bananas'}])
+    solr.add([{'id': '1', 'title': 'bananas', 'allowed_to_read': 'john'}])
     assert 1 == requests.get(
         'http://localhost:18983/solr/restricted_search/' +
-        'select?indent=on&q=title:bananas&qf=title&wt=json'
+        'select?' +
+        '&q=title:bananas' +
+        '&qf=title' +
+        '&wt=json'
     ).json()['response']['numFound']
