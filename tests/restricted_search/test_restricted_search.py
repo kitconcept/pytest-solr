@@ -12,5 +12,5 @@ def test_edismax_query(solr):
     solr.add([{'id': '1', 'title': 'bananas'}])
     assert 1 == requests.get(
         'http://localhost:18983/solr/restricted_search/' +
-        'select?indent=on&q=title:bananas&wt=json'
+        'select?indent=on&q=title:bananas&qf=title&wt=json'
     ).json()['response']['numFound']
