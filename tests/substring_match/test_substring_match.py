@@ -16,6 +16,11 @@ def test_prefix_match(solr):
     assert 1 == solr.search('title:ban').hits
 
 
+def test_multiple_terms(solr):
+    solr.add([{'id': '1', 'title': 'bananas and oranges'}])
+    assert 1 == solr.search('title:bananas').hits
+    assert 1 == solr.search('title:oranges').hits
+
 # def test_suffix_match(solr):
 #     solr.add([{'id': '1', 'title': 'bananas'}])
 #     assert 1 == solr.search('title:nas').hits
