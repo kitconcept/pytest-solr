@@ -29,7 +29,6 @@ def solr_process(
             ),
             timeout=timeout,
         )
-
         solr_executor.start()
 
         def finalize_solr():
@@ -45,7 +44,7 @@ def solr_process(
 
 def solr_core(process_fixture_name, solr_core_name='substring_match'):
 
-    @pytest.fixture
+    @pytest.fixture(scope='session')
     def solr_core_fixture(request):
         process = request.getfixturevalue(process_fixture_name)
         if not process.running():
