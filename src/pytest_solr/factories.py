@@ -55,18 +55,27 @@ def solr_core(process_fixture_name, solr_core_name='substring_match'):
         solr_port = str(process.port)
 
         def create_solr_colr():
-            subprocess.check_output(
-                [
-                    solr_executable,
-                    'create_core',
-                    '-p',
-                    solr_port,
-                    '-c',
-                    solr_core_name,
-                    '-d',
-                    solr_core_directory
-                ],
-            )
+            try:
+                subprocess.check_output(
+                    [
+                        solr_executable,
+                        'create_core',
+                        '-p',
+                        solr_port,
+                        '-c',
+                        solr_core_name,
+                        '-d',
+                        solr_core_directory
+                    ],
+                )
+            except subprocess.CalledProcessError as e:
+                print(
+                    'Creating Solr Core failed. ' +
+                    'Command "{}" failed with the following error: {}'.format(
+                        ' '.join(e.cmd),
+                        e.output
+                    )
+                )
 
         def drop_solr_core():
             subprocess.check_output(
