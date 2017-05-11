@@ -1,8 +1,8 @@
 import os
 import pysolr
 import pytest
+import signal
 import subprocess
-from mirakuru import HTTPExecutor
 
 
 def solr_process(
@@ -15,29 +15,35 @@ def solr_process(
 
     @pytest.fixture(scope='session')
     def solr_process_fixture(request):
+        solr = {
+            'host': host,
+            'port': port,
+        }
         if not os.environ.get('SOLR_VERSION'):
-            solr_version = '6.5.0'
+            solr['version'] = '6.5.0'
         else:
-            solr_version = os.environ['SOLR_VERSION']
+            solr['version'] = os.environ['SOLR_VERSION']
         if not executable:
-            local_executable = 'downloads/solr-{}/bin/solr'.format(solr_version)  # noqa
-        solr_executor = HTTPExecutor(
+            local_executable = 'downloads/solr-{}/bin/solr'.format(
+                solr['version']
+            )
+        solr['directory'] = 'downloads/solr-{}'.format(solr['version'])
+        solr['bin'] = '{}/bin/solr'.format(solr['directory'])
+        devnull = open('/dev/null', 'w')
+        solr['process'] = subprocess.Popen(
             '{} -f -p {}'.format(executable or local_executable, port),
-            'http://{host}:{port}/solr/'.format(
-                host=host,
-                port=port
-            ),
-            timeout=timeout,
+            stdout=devnull,
+            stderr=devnull,
+            shell=True,
+            preexec_fn=os.setsid
         )
-        solr_executor.start()
 
         def finalize_solr():
-            solr_executor.stop()
-            # shutil.rmtree(home_path)
+            os.killpg(solr['process'].pid, signal.SIGTERM)
 
         request.addfinalizer(finalize_solr)
 
-        return solr_executor
+        return solr
 
     return solr_process_fixture
 
@@ -47,12 +53,11 @@ def solr_core(process_fixture_name, solr_core_name='substring_match'):
     @pytest.fixture(scope='module')
     def solr_core_fixture(request):
         process = request.getfixturevalue(process_fixture_name)
-        if not process.running():
-            process.start()
-
-        solr_executable = process.command_parts[0]
+        #if not process.poll():
+        #    process.start()
+        solr_executable = process.get('bin')
         solr_core_directory = 'tests/{}'.format(solr_core_name)
-        solr_port = str(process.port)
+        solr_port = str(process.get('port'))
 
         def create_solr_colr():
             try:
@@ -108,13 +113,13 @@ def solr(process_fixture_name, documents=[]):
     def solr_fixture(request):
         solr_core = process_fixture_name
         process = request.getfixturevalue(process_fixture_name)
-        if not process.running():
-            process.start()
+        # if not process.running():
+        #    process.start()
 
         client = pysolr.Solr(
             'http://{0!s}:{1!s}/solr/{2!s}'.format(
-                process.host,
-                process.port,
+                process.get('host'),
+                process.get('port'),
                 solr_core
             )
         )
