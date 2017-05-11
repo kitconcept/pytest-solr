@@ -11,6 +11,7 @@ cache:
 env:
   - SOLR_VERSION=6.4.1
   - SOLR_VERSION=6.5.0
+  - SOLR_VERSION=6.5.1
 #matrix:
 #  allow_failures:
 #    - env: SOLR_VERSION=5.0.0
