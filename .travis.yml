@@ -7,7 +7,7 @@ cache:
   pip: true
   directories:
     - $HOME/downloads
-    - /home/travis/build/tisto/solr-testing/downloads
+    - /home/travis/build/kitconcept/pytest-solr/downloads
 env:
   - SOLR_VERSION=6.4.2
   - SOLR_VERSION=6.5.0
