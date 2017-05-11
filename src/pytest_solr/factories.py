@@ -19,16 +19,20 @@ def solr_process(
             'host': host,
             'port': port,
         }
+
         if not os.environ.get('SOLR_VERSION'):
             solr['version'] = '6.5.0'
         else:
             solr['version'] = os.environ['SOLR_VERSION']
+
         if not executable:
             local_executable = 'downloads/solr-{}/bin/solr'.format(
                 solr['version']
             )
+
         solr['directory'] = 'downloads/solr-{}'.format(solr['version'])
         solr['bin'] = '{}/bin/solr'.format(solr['directory'])
+
         devnull = open('/dev/null', 'w')
         solr['process'] = subprocess.Popen(
             '{} -f -p {}'.format(executable or local_executable, port),
@@ -38,12 +42,10 @@ def solr_process(
             preexec_fn=os.setsid
         )
 
-        def finalize_solr():
-            os.killpg(solr['process'].pid, signal.SIGTERM)
+        yield solr
 
-        request.addfinalizer(finalize_solr)
-
-        return solr
+        # tear down
+        os.killpg(solr['process'].pid, signal.SIGTERM)
 
     return solr_process_fixture
 
@@ -53,8 +55,6 @@ def solr_core(process_fixture_name, solr_core_name='substring_match'):
     @pytest.fixture(scope='module')
     def solr_core_fixture(request):
         process = request.getfixturevalue(process_fixture_name)
-        #if not process.poll():
-        #    process.start()
         solr_executable = process.get('bin')
         solr_core_directory = 'tests/{}'.format(solr_core_name)
         solr_port = str(process.get('port'))
@@ -100,9 +100,9 @@ def solr_core(process_fixture_name, solr_core_name='substring_match'):
             drop_solr_core()
             create_solr_colr()
 
-        request.addfinalizer(drop_solr_core)
+        yield process
 
-        return process
+        drop_solr_core()
 
     return solr_core_fixture
 
@@ -113,8 +113,6 @@ def solr(process_fixture_name, documents=[]):
     def solr_fixture(request):
         solr_core = process_fixture_name
         process = request.getfixturevalue(process_fixture_name)
-        # if not process.running():
-        #    process.start()
 
         client = pysolr.Solr(
             'http://{0!s}:{1!s}/solr/{2!s}'.format(
@@ -126,11 +124,8 @@ def solr(process_fixture_name, documents=[]):
 
         client.add(documents)
 
-        def drop_indexes():
-            client.delete(q='*:*')
+        yield client
 
-        request.addfinalizer(drop_indexes)
-
-        return client
+        client.delete(q='*:*')
 
     return solr_fixture
