@@ -40,7 +40,6 @@ setup(
     packages=find_packages('src'),
     install_requires=[
         'pytest>=3.0.0',
-        'mirakuru',
         'pysolr',
     ],
     tests_require=[

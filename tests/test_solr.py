@@ -4,7 +4,7 @@ from pytest_solr.factories import solr
 
 
 def test_solr_process(solr_process):
-    assert solr_process.running() is True
+    assert solr_process.get('process').poll() is None
 
 
 def test_solr_core(solr_core):
