@@ -12,9 +12,9 @@ env:
   - SOLR_VERSION=6.4.2
   - SOLR_VERSION=6.5.0
   - SOLR_VERSION=6.5.1
-#matrix:
-#  allow_failures:
-#    - env: SOLR_VERSION=5.0.0
+matrix:
+  allow_failures:
+    - env: SOLR_VERSION=6.4.2
 before_install:
   - mkdir -p $HOME/downloads
   - sed -ie "s#SOLR_VERSION := 6.5.0#SOLR_VERSION := $SOLR_VERSION#" Makefile
