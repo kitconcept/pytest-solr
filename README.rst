@@ -17,8 +17,7 @@ pytest-solr is a pytest plugin for the Apache Solr search server.
 It provides three pytest factories:
 
 solr_process:
-  For starting and stopping the Solr server. This is
-session scoped.
+  For starting and stopping the Solr server. This is session scoped.
 
 solr_core:
   For loading and unloading a Solr core configuration. This is module scoped.
