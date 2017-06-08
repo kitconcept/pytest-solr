@@ -108,22 +108,19 @@ def solr_core(solr_process_fixture_name, solr_core_name='default'):
     return solr_core_fixture
 
 
-def solr(process_fixture_name, documents=[]):
+def solr(solr_core_fixture_name):
 
     @pytest.fixture(scope='function')
     def solr_fixture(request):
-        solr_core = process_fixture_name
-        process = request.getfixturevalue(process_fixture_name)
+        process = request.getfixturevalue(solr_core_fixture_name)
 
         client = pysolr.Solr(
             'http://{0!s}:{1!s}/solr/{2!s}'.format(
                 process.get('host'),
                 process.get('port'),
-                solr_core
+                solr_core_fixture_name
             )
         )
-
-        client.add(documents)
 
         yield client
 
