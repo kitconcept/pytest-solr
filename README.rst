@@ -1,4 +1,4 @@
-.. image:: https://kitconcept.com/logo.png
+.. image:: https://kitconcept.com/logo.svg
    :height: 200px
    :width: 65px
    :alt: kitconcept
