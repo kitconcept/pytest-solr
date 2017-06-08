@@ -10,6 +10,7 @@ def solr_process(
     host='localhost',
     port=18983,
     core='solr',
+    version='6.5.0',
     timeout=60
 ):
 
@@ -21,7 +22,7 @@ def solr_process(
         }
 
         if not os.environ.get('SOLR_VERSION'):
-            solr['version'] = '6.5.0'
+            solr['version'] = version
         else:
             solr['version'] = os.environ['SOLR_VERSION']
 
