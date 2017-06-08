@@ -14,11 +14,33 @@ Introduction
 ------------
 
 pytest-solr is a pytest plugin for the Apache Solr search server.
-It provides three pytest factories
+It provides three pytest factories:
 
-- solr_process: For starting and stopping the Solr server
-- solr_core: For loading and unloading a Solr core configuration
-- solr: For connecting to a Solr server during a test
+- solr_process: For starting and stopping the Solr server. This is
+session scoped.
+- solr_core: For loading and unloading a Solr core configuration. This is module scoped.
+- solr: For connecting to a Solr server during a test. This is function scoped.
+
+Solr Process
+^^^^^^^^^^^^
+
+The solr_process factory starts and stops a the Solr process.
+An existing Solr executable is required for this.
+
+  'executable': path to the Solr executable. Default value is 'downloads/solr-<SOLR_VERSION>/bin/solr'
+  'host': hostname where Solr runs. Default value is 'localhost'.
+  'port': port Solr uses. Default is value is '18983'.
+  'core' Solr core that is used. Default value is 'solr'.
+  'timeout': timeout to wait for Solr to start. Default value is '60' (seconds).
+
+Solr Core
+^^^^^^^^^
+
+The solr_core factory adds and removes a Solr core configuration.
+It expects two parameters, the Solr Process fixture name and the Solr core name.
+
+  'solr_process_fixture_name': String with the name of the Solr Process. This is a required parameter.
+  'solr_core_name': String with the name of the Solr core. This is a required parameter.
 
 
 Installation
@@ -31,6 +53,8 @@ Install pytest-solr with pip::
 
 Usage
 -----
+
+Create a solr core with the name 'minimal' and inject the use the solr factory into a test function to use it::
 
     # -*- coding: utf-8 -*-
     from pytest_solr.factories import solr_core
