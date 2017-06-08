@@ -1,3 +1,4 @@
 pytest
 pysolr
 requests
+zest.releaser
