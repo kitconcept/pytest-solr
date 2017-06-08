@@ -16,10 +16,15 @@ Introduction
 pytest-solr is a pytest plugin for the Apache Solr search server.
 It provides three pytest factories:
 
-- solr_process: For starting and stopping the Solr server. This is
+solr_process:
+  For starting and stopping the Solr server. This is
 session scoped.
-- solr_core: For loading and unloading a Solr core configuration. This is module scoped.
-- solr: For connecting to a Solr server during a test. This is function scoped.
+
+solr_core:
+  For loading and unloading a Solr core configuration. This is module scoped.
+
+solr:
+  For connecting to a Solr server during a test. This is function scoped.
 
 Solr Process
 ^^^^^^^^^^^^
@@ -93,7 +98,7 @@ Example::
 
 The solr fixture can then be injected into the test function and used to add documents to solr or search for terms.
 
-See the `Pysolr documentation<https://github.com/django-haystack/pysolr>` for more details.
+See the `pysolr documentation <https://github.com/django-haystack/pysolr>`_. for more details.
 
 
 Installation
