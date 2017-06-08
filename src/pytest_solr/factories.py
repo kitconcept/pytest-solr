@@ -51,11 +51,11 @@ def solr_process(
     return solr_process_fixture
 
 
-def solr_core(process_fixture_name, solr_core_name='substring_match'):
+def solr_core(solr_process_fixture_name, solr_core_name='substring_match'):
 
     @pytest.fixture(scope='module')
     def solr_core_fixture(request):
-        process = request.getfixturevalue(process_fixture_name)
+        process = request.getfixturevalue(solr_process_fixture_name)
         solr_executable = process.get('bin')
         solr_core_directory = 'tests/{}'.format(solr_core_name)
         solr_port = str(process.get('port'))
