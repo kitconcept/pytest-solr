@@ -27,11 +27,11 @@ Solr Process
 The solr_process factory starts and stops a the Solr process.
 An existing Solr executable is required for this.
 
-  'executable': path to the Solr executable. Default value is 'downloads/solr-<SOLR_VERSION>/bin/solr'
-  'host': hostname where Solr runs. Default value is 'localhost'.
-  'port': port Solr uses. Default is value is '18983'.
-  'core' Solr core that is used. Default value is 'solr'.
-  'timeout': timeout to wait for Solr to start. Default value is '60' (seconds).
+'executable': path to the Solr executable. Default value is 'downloads/solr-<SOLR_VERSION>/bin/solr'
+'host': hostname where Solr runs. Default value is 'localhost'.
+'port': port Solr uses. Default is value is '18983'.
+'core' Solr core that is used. Default value is 'solr'.
+'timeout': timeout to wait for Solr to start. Default value is '60' (seconds).
 
 Example::
 
@@ -53,8 +53,8 @@ Solr Core
 The solr_core factory adds and removes a Solr core configuration.
 It expects two parameters, the Solr Process fixture name and the Solr core name.
 
-  'solr_process_fixture_name': String with the name of the Solr Process. This is a required parameter.
-  'solr_core_name': String with the name of the Solr core. Default value is 'default'.
+'solr_process_fixture_name': String with the name of the Solr Process. This is a required parameter.
+'solr_core_name': String with the name of the Solr core. Default value is 'default'.
 
 Example::
 
@@ -68,7 +68,7 @@ Solr
 The Solr factory connects to Solr via pysolr.
 It expects a single parameter, the Solr core fixture name.
 
-  'solr_core_fixture_name': String with the name of the Solr core. This is a required parameter.
+'solr_core_fixture_name': String with the name of the Solr core. This is a required parameter.
 
 Example::
 
