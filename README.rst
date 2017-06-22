@@ -7,6 +7,17 @@ Solr process and client fixtures for py.test.
    :alt: kitconcept
    :target: https://kitconcept.com/
 
+.. image:: https://img.shields.io/pypi/v/pytest-solr.svg
+    :target: https://pypi.python.org/pypi/pytest-solr/
+    :alt: Latest Version
+
+.. image:: https://img.shields.io/pypi/status/pytest-solr.svg
+    :target: https://pypi.python.org/pypi/pytest-solr/
+    :alt: Egg Status
+
+.. image:: https://img.shields.io/pypi/l/pytest-solr.svg
+    :target: https://pypi.python.org/pypi/pytest-solr/
+    :alt: License
 
 Introduction
 ------------
