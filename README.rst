@@ -1,14 +1,14 @@
-.. image:: http://kitconcept.com/logo.svg
-   :height: 200px
-   :width: 65px
-   :alt: kitconcept
-   :align: center
-   :target: https://www.kitconcept.com/
-
 .. image:: https://travis-ci.org/kitconcept/pytest-solr.svg?branch=master
     :target: https://travis-ci.org/kitconcept/pytest-solr
 
 Solr process and client fixtures for py.test.
+
+.. image:: http://kitconcept.com/logo.svg
+   :height: 130px
+   :width: 400px
+   :alt: kitconcept
+   :align: center
+   :target: https://www.kitconcept.com/
 
 
 Introduction
