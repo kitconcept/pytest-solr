@@ -3,9 +3,7 @@
 
 Solr process and client fixtures for py.test.
 
-.. image:: http://kitconcept.com/logo.svg
-   :height: 130px
-   :width: 400px
+.. image:: https://raw.githubusercontent.com/kitconcept/pytest-solr/master/kitconcept.png
    :alt: kitconcept
    :align: center
    :target: https://www.kitconcept.com/
