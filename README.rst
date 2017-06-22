@@ -1,12 +1,6 @@
 .. image:: https://travis-ci.org/kitconcept/pytest-solr.svg?branch=master
     :target: https://travis-ci.org/kitconcept/pytest-solr
 
-Solr process and client fixtures for py.test.
-
-.. image:: https://raw.githubusercontent.com/kitconcept/pytest-solr/master/kitconcept.png
-   :alt: kitconcept
-   :target: https://kitconcept.com/
-
 .. image:: https://img.shields.io/pypi/v/pytest-solr.svg
     :target: https://pypi.python.org/pypi/pytest-solr/
     :alt: Latest Version
@@ -18,6 +12,12 @@ Solr process and client fixtures for py.test.
 .. image:: https://img.shields.io/pypi/l/pytest-solr.svg
     :target: https://pypi.python.org/pypi/pytest-solr/
     :alt: License
+
+Solr process and client fixtures for py.test.
+
+.. image:: https://raw.githubusercontent.com/kitconcept/pytest-solr/master/kitconcept.png
+   :alt: kitconcept
+   :target: https://kitconcept.com/
 
 Introduction
 ------------
