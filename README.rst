@@ -10,6 +10,7 @@
 
 Solr process and client fixtures for py.test.
 
+
 Introduction
 ------------
 
@@ -24,6 +25,7 @@ solr_core:
 
 solr:
   For connecting to a Solr server during a test. This is function scoped.
+
 
 Solr Process
 ^^^^^^^^^^^^
@@ -72,6 +74,7 @@ Example::
   from pytest_solr.factories import solr_core
 
   my_solr_core = solr_core('solr_process', 'my_solr_core')
+
 
 Solr
 ^^^^
