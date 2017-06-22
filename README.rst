@@ -125,6 +125,13 @@ Create a solr core with the name 'minimal' and inject the use the solr factory i
         solr.add([{'id': '1', 'title': 'bananas'}])
         assert 1 == solr.search('title:bananas').hits
 
+License
+-------
+
+Copyright kitconcept GmbH.
+
+Distributed under the terms of the MIT license, pytest-solr is free and Open Source software.
+
 
 Contribute
 ----------
