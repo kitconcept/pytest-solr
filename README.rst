@@ -1,11 +1,11 @@
-.. image:: https://raw.githubusercontent.com/kitconcept/pytest-solr/master/kitconcept.png
-   :alt: kitconcept
-   :target: https://kitconcept.com/
-
 .. image:: https://travis-ci.org/kitconcept/pytest-solr.svg?branch=master
     :target: https://travis-ci.org/kitconcept/pytest-solr
 
 Solr process and client fixtures for py.test.
+
+.. image:: https://raw.githubusercontent.com/kitconcept/pytest-solr/master/kitconcept.png
+   :alt: kitconcept
+   :target: https://kitconcept.com/
 
 
 Introduction
