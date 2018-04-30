@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<schema name="minimal" version="1.5">
+
+  <uniqueKey>id</uniqueKey>
+
+  <types>
+    <!-- Default Field Types -->
+    <fieldType name="long" class="solr.TrieLongField" positionIncrementGap="0" precisionStep="0"/>
+    <fieldType name="booleans" class="solr.BoolField" sortMissingLast="true" multiValued="true"/>
+    <fieldType name="date" class="solr.TrieDateField" positionIncrementGap="0" precisionStep="0"/>
+    <fieldType name="tfloat" class="solr.TrieFloatField" positionIncrementGap="0" precisionStep="8"/>
+    <fieldType name="tfloats" class="solr.TrieFloatField" positionIncrementGap="0" multiValued="true" precisionStep="8"/>
+    <fieldType name="tint" class="solr.TrieIntField" positionIncrementGap="0" precisionStep="8"/>
+    <fieldType name="tints" class="solr.TrieIntField" positionIncrementGap="0" multiValued="true" precisionStep="8"/>
+    <fieldType name="tlong" class="solr.TrieLongField" positionIncrementGap="0" precisionStep="8"/>
+    <fieldType name="tlongs" class="solr.TrieLongField" positionIncrementGap="0" multiValued="true" precisionStep="8"/>
+    <fieldType name="point" class="solr.PointType" subFieldSuffix="_d" dimension="2"/>
+    <fieldType name="random" class="solr.RandomSortField" indexed="true"/>
+    <fieldType name="string" class="solr.StrField" sortMissingLast="true"/>
+    <fieldType name="strings" class="solr.StrField" sortMissingLast="true" multiValued="true"/>
+    <fieldType name="tdate" class="solr.TrieDateField" positionIncrementGap="0" precisionStep="6"/>
+    <fieldType name="tdates" class="solr.TrieDateField" positionIncrementGap="0" multiValued="true" precisionStep="6"/>
+    <fieldType name="tdouble" class="solr.TrieDoubleField" positionIncrementGap="0" precisionStep="8"/>
+    <fieldType name="tdoubles" class="solr.TrieDoubleField" positionIncrementGap="0" multiValued="true" precisionStep="8"/>
+  </types>
+
+  <fields>
+    <field name="id" type="string" indexed="true" stored="true" required="true" />
+    <field name="_version_" type="long" indexed="true" stored="true"/>
+
+    <!-- Plone Core Fields -->
+    <field name="allowedRolesAndUsers" type="string" stored="false" indexed="true" multiValued="true" />
+    <field name="created" type="date" stored="true" />
+    <field name="Creator" type="string" stored="true" />
+    <field name="Date" type="date" stored="true" />
+    <field name="default" type="string" indexed="true" stored="false" multiValued="true" />
+
+    <field name="Description" type="string" stored="true" />
+    <field name="effective" type="date" indexed="true" stored="true" />
+    <field name="exclude_from_nav" type="boolean" indexed="false" stored="true" />
+    <field name="expires" type="date" indexed="true" stored="true" />
+    <field name="getIcon" type="string" indexed="false" stored="true" />
+    <field name="getId" type="string" indexed="false" stored="true" />
+    <field name="getRemoteUrl" type="string" indexed="false" stored="true" />
+    <field name="is_folderish" type="boolean" indexed="false" stored="true" />
+    <field name="Language" type="string" indexed="false" stored="true" />
+    <field name="modified" type="date" indexed="true" stored="true" />
+    <field name="object_provides" type="string" indexed="false" stored="false" multiValued="true" />
+    <field name="path_depth" type="int" indexed="true" stored="false" />
+    <field name="path_parents" type="string" indexed="true" stored="false" multiValued="true" />
+    <field name="path_string" type="string" indexed="false" stored="true" />
+    <field name="portal_type" type="string" stored="true" indexed="true" />
+    <field name="review_state" type="string" stored="true" indexed="true" />
+    <field name="SearchableText" type="string" stored="true" indexed="true" />
+    <field name="searchwords" type="string" indexed="false" stored="false" multiValued="true" />
+    <field name="showinsearch" type="boolean" indexed="true" stored="false" />
+    <field name="Subject" type="string" indexed="true" stored="true" multiValued="true" />
+    <field name="Title" type="string" indexed="true" stored="true" />
+    <field name="Type" type="string" indexed="true" stored="true" />
+    <field name="UID" type="string" indexed="true" stored="true" required="true" />
+
+    <copyField source="Title" dest="default"/>
+    <copyField source="Description" dest="default"/>
+    <copyField source="Subject" dest="default"/>
+    <copyField source="SearchableText" dest="default"/>
+
+    <dynamicField name="*"  type="string"  indexed="true" stored="true" />
+  </fields>
+
+</schema>
