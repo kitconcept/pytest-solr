@@ -21,9 +21,8 @@ virtualenv:
 	@echo "Create Virtual Python Environment"
 	@if [[ ! -d $(CURRENT_DIR)/.env ]]; then \
 		virtualenv $(CURRENT_DIR)/.env; \
-		source $(CURRENT_DIR)/.env/bin/activate; \
-		pip install -r requirements.txt; \
-		python setup.py develop; \
+		$(CURRENT_DIR)/.env/bin/pip install -r requirements.txt; \
+		$(CURRENT_DIR)/.env/bin/python setup.py develop; \
 	else \
 		echo "Skip creating virtualenv."; \
 	fi
