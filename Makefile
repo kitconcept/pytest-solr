@@ -1,5 +1,5 @@
 SHELL := /bin/bash
-SOLR_VERSION := 6.5.0
+SOLR_VERSION := 7.3.0
 CURRENT_DIR:=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 
 all: bootstrap virtualenv test
@@ -36,4 +36,3 @@ clean:
 test:
 	@echo "Run Tests"
 	.env/bin/py.test tests
-

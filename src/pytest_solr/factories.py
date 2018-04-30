@@ -10,7 +10,7 @@ def solr_process(
     host='localhost',
     port=18983,
     core='solr',
-    version='6.5.0',
+    version='7.3.0',
     timeout=60
 ):
 

@@ -8,11 +8,11 @@ solr = solr('spellcheck')
 
 def test_spellcheck_attribute_is_included(solr):
     solr.add([{'id': '1', 'title': 'bananas'}])
-    assert {
-        u'bananos': {
+    assert [
+        u'bananos', {
             u'numFound': 1,
             u'suggestion': [u'bananas'],
             u'startOffset': 6,
             u'endOffset': 13
         }
-    } == solr.search('title:bananos').spellcheck.get('suggestions')
+    ] == solr.search('title:bananos').spellcheck.get('suggestions')

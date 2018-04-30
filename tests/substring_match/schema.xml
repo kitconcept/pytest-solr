@@ -3,7 +3,6 @@
 <schema name="substring_match" version="1.5">
 
   <uniqueKey>id</uniqueKey>
-  <defaultSearchField>id</defaultSearchField>
 
   <types>
     <fieldType name="string" class="solr.StrField" />
