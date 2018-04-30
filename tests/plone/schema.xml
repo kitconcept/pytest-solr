@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<schema name="minimal" version="1.5">
+<schema name="plone" version="1.5">
 
   <uniqueKey>id</uniqueKey>
 
