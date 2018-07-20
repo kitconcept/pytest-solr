@@ -24,3 +24,8 @@ def test_search_ignores_lowercase(solr):
 def test_search_ignores_uppercase(solr):
     solr.add([{'id': '1', 'Title': 'bananas'}])
     assert 1 == solr.search('Title:Bananas').hits
+
+
+def test_title_indexed_in_searchable_text(solr):
+    solr.add([{'id': '1', 'Title': 'bananas'}])
+    assert 1 == solr.search('SearchableText:Bananas').hits

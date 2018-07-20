@@ -76,7 +76,7 @@
     <field name="path_string" type="string" indexed="false" stored="true" />
     <field name="portal_type" type="string" stored="true" indexed="true" />
     <field name="review_state" type="string" stored="true" indexed="true" />
-    <field name="SearchableText" type="string" stored="true" indexed="true" />
+    <field name="SearchableText" type="text_general" stored="true" indexed="true" />
     <field name="searchwords" type="string" indexed="false" stored="false" multiValued="true" />
     <field name="showinsearch" type="boolean" indexed="true" stored="false" />
     <field name="Subject" type="string" indexed="true" stored="true" multiValued="true" />
@@ -84,10 +84,9 @@
     <field name="Type" type="string" indexed="true" stored="true" />
     <field name="UID" type="string" indexed="true" stored="true" required="false" />
 
-    <copyField source="Title" dest="default"/>
-    <copyField source="Description" dest="default"/>
-    <copyField source="Subject" dest="default"/>
-    <copyField source="SearchableText" dest="default"/>
+    <copyField source="Title" dest="SearchableText"/>
+    <copyField source="Description" dest="SearchableText"/>
+    <copyField source="Subject" dest="SearchableText"/>
 
     <dynamicField name="*"  type="string"  indexed="true" stored="true" />
   </fields>
