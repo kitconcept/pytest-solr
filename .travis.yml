@@ -22,7 +22,7 @@ matrix:
     - env: SOLR_VERSION=7.4.0
 before_install:
   - mkdir -p $HOME/downloads
-  - sed -ie "s#SOLR_VERSION := 6.5.0#SOLR_VERSION := $SOLR_VERSION#" Makefile
+  - sed -ie "s#SOLR_VERSION := 7.3.0#SOLR_VERSION := $SOLR_VERSION#" Makefile
 install:
   - make bootstrap
   - sudo pip install -r requirements.txt
