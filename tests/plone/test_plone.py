@@ -28,9 +28,14 @@ def test_search_ignores_uppercase(solr):
 
 def test_title_indexed_in_searchable_text(solr):
     solr.add([{'id': '1', 'Title': 'bananas'}])
-    assert 1 == solr.search('SearchableText:Bananas').hits
+    assert 1 == solr.search('default:bananas').hits
 
 
 def test_description_indexed_in_searchable_text(solr):
     solr.add([{'id': '1', 'Description': 'bananas'}])
-    assert 1 == solr.search('SearchableText:Bananas').hits
+    assert 1 == solr.search('default:bananas').hits
+
+
+def test_creator_indexed_in_searchable_text(solr):
+    solr.add([{'id': '1', 'Creator': 'bananas'}])
+    assert 1 == solr.search('default:bananas').hits
