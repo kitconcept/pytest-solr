@@ -9,7 +9,6 @@ cache:
     - $HOME/downloads
     - /home/travis/build/kitconcept/pytest-solr/downloads
 env:
-  - SOLR_VERSION=6.4.2
   - SOLR_VERSION=6.5.0
   - SOLR_VERSION=6.5.1
   - SOLR_VERSION=6.6.3
