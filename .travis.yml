@@ -9,17 +9,14 @@ cache:
     - $HOME/downloads
     - /home/travis/build/kitconcept/pytest-solr/downloads
 env:
-  - SOLR_VERSION=6.4.2
-  - SOLR_VERSION=6.5.0
-  - SOLR_VERSION=6.5.1
   - SOLR_VERSION=6.6.3
   - SOLR_VERSION=7.3.0
   - SOLR_VERSION=7.4.0
   - SOLR_VERSION=7.7.3
-matrix:
-  allow_failures:
-    - env: SOLR_VERSION=6.5.0
-    - env: SOLR_VERSION=6.5.1
+# matrix:
+#   allow_failures:
+#     - env: SOLR_VERSION=6.5.0
+#     - env: SOLR_VERSION=6.5.1
 before_install:
   - mkdir -p $HOME/downloads
   - sed -ie "s#SOLR_VERSION := 7.3.0#SOLR_VERSION := $SOLR_VERSION#" Makefile
