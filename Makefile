@@ -1,5 +1,5 @@
 SHELL := /bin/bash
-SOLR_VERSION := 7.3.0
+SOLR_VERSION := 7.7.3
 CURRENT_DIR:=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 
 all: bootstrap virtualenv test

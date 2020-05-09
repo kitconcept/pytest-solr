@@ -7,6 +7,9 @@
 - Black.
   [timo]
 
+- Make Solr 7.7.3 the new default.
+  [timo]
+
 
 1.0a1 (2017-06-22)
 ------------------
