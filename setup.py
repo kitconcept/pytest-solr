@@ -11,7 +11,7 @@ def read(fname):
 
 setup(
     name='pytest-solr',
-    version='1.0.0',
+    version='1.0.1.dev0',
     description='Solr process and client fixtures for py.test.',
     long_description=(
         read('README.rst') + '\n\n' + read('CHANGES.rst')
