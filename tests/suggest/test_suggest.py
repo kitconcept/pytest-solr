@@ -11,7 +11,6 @@ solr = solr("suggest")
 def test_suggest_single_term(solr):
     # http://localhost:18983/solr/suggest/suggest?suggest=true&suggest.build=true&suggest.dictionary=mySuggester&suggest.q=b&suggest.cfq=memory
     solr.add([{"id": "1", "title": "bananas"}])
-    solr._select(params={"q": "b", "wt": "json"}, handler="suggest")
 
     assert [
         1,
@@ -32,9 +31,29 @@ def test_suggest_single_term(solr):
     ]
 
 
-def test_suggest_multiple_terms(self):
+def test_suggest_multiple_terms(solr):
     # colorless -> colorless green
-    pass
+    solr.add([{"id": "1", "title": "colorless green ideas"}])
+    solr.add([{"id": "2", "title": "green ideas"}])
+    solr.add([{"id": "3", "title": "ideas"}])
+
+    assert [
+        1,
+        json.loads(solr._select(params={"q": "color", "wt": "json"}, handler="suggest"))
+        .get("suggest")
+        .get("mySuggester")
+        .get("color")
+        .get("numFound"),
+    ]
+    assert [
+        u"colorless green ideas",
+        json.loads(solr._select(params={"q": "color", "wt": "json"}, handler="suggest"))
+        .get("suggest")
+        .get("mySuggester")
+        .get("color")
+        .get("suggestions")[0]
+        .get("term"),
+    ]
 
 
 def test_suggest_multiple_terms_unordered_suggestions(solr):
