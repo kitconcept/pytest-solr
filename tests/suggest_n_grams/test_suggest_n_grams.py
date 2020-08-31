@@ -31,6 +31,33 @@ def test_suggest_single_term(solr):
     ]
 
 
+def test_suggest_single_term_includes_url(solr):
+    # http://localhost:18983/solr/suggest/suggest?suggest=true&suggest.build=true&suggest.dictionary=mySuggester&suggest.q=b&suggest.cfq=memory
+    solr.add([{"id": "1", "title": "bananas", "url": "https://bananas.com"}])
+
+    assert [
+        1,
+        json.loads(
+            solr._select(
+                params={"q": "ba", "fl": "url", "wt": "json"}, handler="suggest_topic"
+            )
+        )
+        .get("response")
+        .get("numFound"),
+    ]
+    assert [
+        u"https://bananas.com",
+        json.loads(
+            solr._select(
+                params={"q": "ba", "fl": "url", "wt": "json"}, handler="suggest_topic"
+            )
+        )
+        .get("response")
+        .get("docs")[0]
+        .get("url"),
+    ]
+
+
 def test_suggest_multiple_terms(solr):
     solr.add([{"id": "1", "title": "colorless green ideas"}])
     solr.add([{"id": "2", "title": "green ideas"}])

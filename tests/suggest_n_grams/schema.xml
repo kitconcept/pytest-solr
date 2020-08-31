@@ -39,6 +39,7 @@
   <fields>
     <field name="id" type="string" indexed="true" stored="true" required="true" />
     <field name="title" type="string" indexed="true" stored="true" required="false" />
+    <field name="url" type="string" indexed="true" stored="true" required="false" />
     <dynamicField name="*"  type="string"  indexed="true" stored="true" />
    
     <field name="suggest" type="text_suggest" indexed="true" stored="false"/>
