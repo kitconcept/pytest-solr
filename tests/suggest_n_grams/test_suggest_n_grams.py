@@ -32,15 +32,13 @@ def test_suggest_single_term(solr):
 
 
 def test_suggest_multiple_terms(solr):
-    # colorless -> colorless green
     solr.add([{"id": "1", "title": "colorless green ideas"}])
     solr.add([{"id": "2", "title": "green ideas"}])
-    solr.add([{"id": "3", "title": "ideas"}])
 
     assert [
-        1,
+        2,
         json.loads(
-            solr._select(params={"q": "color", "wt": "json"}, handler="suggest_topic")
+            solr._select(params={"q": "green", "wt": "json"}, handler="suggest_topic")
         )
         .get("response")
         .get("numFound"),
@@ -48,7 +46,7 @@ def test_suggest_multiple_terms(solr):
     assert [
         u"colorless green ideas",
         json.loads(
-            solr._select(params={"q": "color", "wt": "json"}, handler="suggest_topic")
+            solr._select(params={"q": "green", "wt": "json"}, handler="suggest_topic")
         )
         .get("response")
         .get("docs")[0]
