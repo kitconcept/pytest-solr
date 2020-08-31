@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<schema name="suggest" version="1.5">
+
+  <uniqueKey>id</uniqueKey>
+
+  <types>
+    <fieldType name="string" class="solr.StrField" />
+    <fieldType class="solr.TextField" name="textSuggest" positionIncrementGap="100">
+      <analyzer>
+        <tokenizer class="solr.StandardTokenizerFactory"/>
+        <filter class="solr.StandardFilterFactory"/>
+        <filter class="solr.LowerCaseFilterFactory"/>
+      </analyzer>
+    </fieldType>
+  </types>
+
+  <fields>
+    <field name="id" type="string" indexed="true" stored="true" required="true" />
+    <field name="title" type="textSuggest" indexed="true" stored="true" required="false" />
+    <dynamicField name="*"  type="string"  indexed="true" stored="true" />
+
+  </fields>
+
+</schema>
