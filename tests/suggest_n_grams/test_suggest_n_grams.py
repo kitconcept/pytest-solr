@@ -54,6 +54,48 @@ def test_suggest_multiple_terms(solr):
     ]
 
 
+def test_suggest_multiple_terms_boost_direct_matches(solr):
+    solr.add([{"id": "1", "title": "colorless green ideas"}])
+    solr.add([{"id": "2", "title": "green ideas"}])
+    solr.add([{"id": "2", "title": "greener ideas"}])
+
+    assert [
+        3,
+        json.loads(
+            solr._select(params={"q": "green", "wt": "json"}, handler="suggest_topic")
+        )
+        .get("response")
+        .get("numFound"),
+    ]
+    assert [
+        u"green ideas",
+        json.loads(
+            solr._select(params={"q": "green", "wt": "json"}, handler="suggest_topic")
+        )
+        .get("response")
+        .get("docs")[0]
+        .get("title"),
+    ]
+    assert [
+        u"colorless green ideas",
+        json.loads(
+            solr._select(params={"q": "green", "wt": "json"}, handler="suggest_topic")
+        )
+        .get("response")
+        .get("docs")[0]
+        .get("title"),
+    ]
+    assert [
+        u"greener ideas",
+        json.loads(
+            solr._select(params={"q": "green", "wt": "json"}, handler="suggest_topic")
+        )
+        .get("response")
+        .get("docs")[0]
+        .get("title"),
+    ]
+
+
 def test_suggest_multiple_terms_unordered_suggestions(solr):
     # green -> colorless green
     # recognizes “shirts” as part of the phrase, like “men’s shirts,” and suggests it to the customer along with “women’s shirts,” “work shirts,” and other phrases that contain “men’s.”
