@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config>
+  <luceneMatchVersion>4.5</luceneMatchVersion>
+
+  <dataDir>${solr.data.dir:}</dataDir>
+
+  <directoryFactory name="DirectoryFactory"
+                    class="${solr.directoryFactory:solr.NRTCachingDirectoryFactory}"/>
+
+  <codecFactory class="solr.SchemaCodecFactory"/>
+  <schemaFactory class="ClassicIndexSchemaFactory"/>
+
+  <requestHandler name="/select" class="solr.SearchHandler">
+    <lst name="defaults">
+      <str name="echoParams">explicit</str>
+      <int name="rows">10</int>
+      <str name="df">text</str>
+    </lst>
+  </requestHandler>
+
+  <requestHandler name="/update" class="solr.UpdateRequestHandler" />
+
+  <requestHandler name="/admin/ping" class="solr.PingRequestHandler">
+    <lst name="invariants">
+      <str name="q">solrpingquery</str>
+    </lst>
+    <lst name="defaults">
+      <str name="echoParams">all</str>
+    </lst>
+  </requestHandler>
+
+  <requestHandler class="org.apache.solr.handler.component.SearchHandler" name="/suggest_topic">
+    <lst name="defaults">
+      <str name="echoParams">none</str>
+      <str name="wt">json</str>
+      <str name="indent">false</str>
+      <str name="defType">edismax</str>
+      <str name="rows">10</str>
+      <str name="fl">title</str>
+      <str name="qf">suggest^10 suggest_ngram</str>
+    </lst>
+  </requestHandler>
+
+  <requestHandler class="org.apache.solr.handler.component.SearchHandler" name="/suggest">
+    <lst name="defaults">
+      <str name="echoParams">none</str>
+      <str name="wt">json</str>
+      <str name="indent">false</str>
+      <str name="spellcheck">true</str>
+      <str name="spellcheck.dictionary">suggestDictionary</str>
+      <str name="spellcheck.onlyMorePopular">true</str>
+      <str name="spellcheck.count">5</str>
+      <str name="spellcheck.collate">false</str>
+    </lst>
+    <arr name="components">
+      <str>suggest</str>
+    </arr>
+  </requestHandler>
+
+  <searchComponent class="solr.SpellCheckComponent" name="suggest">
+    <lst name="spellchecker">
+      <str name="name">suggestDictionary</str>
+      <str name="classname">org.apache.solr.spelling.suggest.Suggester</str>
+      <str name="lookupImpl">org.apache.solr.spelling.suggest.fst.FSTLookupFactory</str>
+      <str name="field">suggest</str>
+      <float name="threshold">0.</float>
+      <str name="buildOnCommit">true</str>
+    </lst>
+  </searchComponent>
+
+</config>
