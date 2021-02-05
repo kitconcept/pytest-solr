@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<schema name="german_umlaut_normalizer" version="1.5">
+
+  <uniqueKey>id</uniqueKey>
+
+  <types>
+    <fieldType name="string" class="solr.StrField" />
+
+    <fieldType name="text" class="solr.TextField" positionIncrementGap="100">
+      <analyzer type="index">
+        <charFilter class="solr.MappingCharFilterFactory" mapping="mapping-FoldToASCII.txt"/>
+        <tokenizer class="solr.StandardTokenizerFactory"/>
+        <filter class="solr.WordDelimiterGraphFilterFactory" splitOnCaseChange="1" splitOnNumerics="1" stemEnglishPossessive="1" generateWordParts="1" generateNumberParts="1" catenateWords="1" catenateNumbers="1" catenateAll="0" preserveOriginal="0"/>
+        <filter class="solr.LowerCaseFilterFactory"/>
+      </analyzer>
+      <analyzer type="query">
+        <charFilter class="solr.MappingCharFilterFactory" mapping="mapping-FoldToASCII.txt"/>
+        <tokenizer class="solr.StandardTokenizerFactory"/>
+        <filter class="solr.WordDelimiterGraphFilterFactory" splitOnCaseChange="1" splitOnNumerics="1" stemEnglishPossessive="1" generateWordParts="1" generateNumberParts="1" catenateWords="0" catenateNumbers="0" catenateAll="0" preserveOriginal="0"/>
+        <filter class="solr.LowerCaseFilterFactory"/>
+      </analyzer>
+    </fieldType>
+  </types>
+
+  <fields>
+    <field name="id" type="string" indexed="true" stored="true" required="true" />
+    <field name="title" type="text" indexed="true" stored="true" required="false" />
+    <dynamicField name="*"  type="string"  indexed="true" stored="true" />
+  </fields>
+
+
+</schema>

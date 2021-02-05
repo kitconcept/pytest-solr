@@ -1,0 +1,71 @@
+# The ASF licenses this file to You under the Apache License, Version 2.0
+# (the "License"); you may not use this file except in compliance with
+# the License.  You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
+# This map converts alphabetic, numeric, and symbolic Unicode characters
+# which are not in the first 127 ASCII characters (the "Basic Latin" Unicode
+# block) into their ASCII equivalents, if one exists.
+#
+# Characters from the following Unicode blocks are converted; however, only
+# those characters with reasonable ASCII alternatives are converted:
+#
+# - C1 Controls and Latin-1 Supplement: http://www.unicode.org/charts/PDF/U0080.pdf
+# - Latin Extended-A: http://www.unicode.org/charts/PDF/U0100.pdf
+# - Latin Extended-B: http://www.unicode.org/charts/PDF/U0180.pdf
+# - Latin Extended Additional: http://www.unicode.org/charts/PDF/U1E00.pdf
+# - Latin Extended-C: http://www.unicode.org/charts/PDF/U2C60.pdf
+# - Latin Extended-D: http://www.unicode.org/charts/PDF/UA720.pdf
+# - IPA Extensions: http://www.unicode.org/charts/PDF/U0250.pdf
+# - Phonetic Extensions: http://www.unicode.org/charts/PDF/U1D00.pdf
+# - Phonetic Extensions Supplement: http://www.unicode.org/charts/PDF/U1D80.pdf
+# - General Punctuation: http://www.unicode.org/charts/PDF/U2000.pdf
+# - Superscripts and Subscripts: http://www.unicode.org/charts/PDF/U2070.pdf
+# - Enclosed Alphanumerics: http://www.unicode.org/charts/PDF/U2460.pdf
+# - Dingbats: http://www.unicode.org/charts/PDF/U2700.pdf
+# - Supplemental Punctuation: http://www.unicode.org/charts/PDF/U2E00.pdf
+# - Alphabetic Presentation Forms: http://www.unicode.org/charts/PDF/UFB00.pdf
+# - Halfwidth and Fullwidth Forms: http://www.unicode.org/charts/PDF/UFF00.pdf
+#  
+# See: http://en.wikipedia.org/wiki/Latin_characters_in_Unicode
+#
+# The set of character conversions supported by this map is a superset of
+# those supported by the map represented by mapping-ISOLatin1Accent.txt.
+#
+# See the bottom of this file for the Perl script used to generate the contents
+# of this file (without this header) from ASCIIFoldingFilter.java.
+
+
+# Syntax:
+#   "source" => "target"
+#     "source".length() > 0 (source cannot be empty.)
+#     "target".length() >= 0 (target can be empty.)
+
+# Ä  [LATIN CAPITAL LETTER A WITH DIAERESIS]
+"\u00C4" => "Ae"
+
+# ä  [LATIN SMALL LETTER A WITH DIAERESIS]
+"\u00E4" => "ae"
+
+# Ö  [LATIN CAPITAL LETTER O WITH DIAERESIS]
+"\u00D6" => "Oe"
+
+# ö  [LATIN SMALL LETTER O WITH DIAERESIS]
+"\u00F6" => "oe"
+
+# ß  [LATIN SMALL LETTER SHARP S]
+"\u00DF" => "ss"
+
+# Ü  [LATIN CAPITAL LETTER U WITH DIAERESIS]
+"\u00DC" => "Ue"
+
+# ü  [LATIN SMALL LETTER U WITH DIAERESIS]
+"\u00FC" => "ue"
