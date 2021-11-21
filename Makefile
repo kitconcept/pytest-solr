@@ -2,10 +2,10 @@ SHELL := /bin/bash
 SOLR_VERSION := 7.7.3
 CURRENT_DIR:=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 
-all: bootstrap virtualenv test
+all: download-solr virtualenv test
 
-bootstrap:
-	@echo "Bootstrap"
+download-solr:
+	@echo "Download Solr"
 	@if [[ ! -f $(CURRENT_DIR)/downloads/solr-$(SOLR_VERSION).tgz  ]]; then \
 		wget -P $(CURRENT_DIR)/downloads http://archive.apache.org/dist/lucene/solr/$(SOLR_VERSION)/solr-$(SOLR_VERSION).tgz; \
 	else \
@@ -19,20 +19,16 @@ bootstrap:
 
 virtualenv:
 	@echo "Create Virtual Python Environment"
-	@if [[ ! -d $(CURRENT_DIR)/.env ]]; then \
-		virtualenv $(CURRENT_DIR)/.env; \
-		$(CURRENT_DIR)/.env/bin/pip install -r requirements.txt; \
-		$(CURRENT_DIR)/.env/bin/python setup.py develop; \
-	else \
-		echo "Skip creating virtualenv."; \
-	fi
+	python3 -m venv .
+	bin/pip install -r requirements.txt
+	bin/python setup.py develop
 
 clean:
 	@echo "Clean"
-	rm -rf .env
+	rm -rf bin/ lib/ pyvenv.cfg
 	find . -name "*.pyc" -exec rm -rf {} \;
 	find . -name "__pycache__" -exec rm -rf {} \;
 
 test:
 	@echo "Run Tests"
-	.env/bin/py.test tests
+	bin/py.test tests
