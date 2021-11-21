@@ -80,7 +80,14 @@ def solr_core(solr_process_fixture_name, solr_core_name="default"):
 
         def drop_solr_core():
             subprocess.check_output(
-                [solr_executable, "delete", "-p", solr_port, "-c", solr_core_name,],
+                [
+                    solr_executable,
+                    "delete",
+                    "-p",
+                    solr_port,
+                    "-c",
+                    solr_core_name,
+                ],
             )
 
         try:
