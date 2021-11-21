@@ -9,7 +9,7 @@
     <fieldType class="solr.TextField" name="textSuggest" positionIncrementGap="100">
       <analyzer>
         <tokenizer class="solr.StandardTokenizerFactory"/>
-        <filter class="solr.StandardFilterFactory"/>
+        <!-- Deprecated in Solr 7: <filter class="solr.StandardFilterFactory"/>-->
         <filter class="solr.LowerCaseFilterFactory"/>
       </analyzer>
     </fieldType>
