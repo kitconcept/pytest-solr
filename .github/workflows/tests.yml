@@ -36,7 +36,7 @@ jobs:
 
       # install Solr
       - run: sed -ie "s#SOLR_VERSION := 7.7.3#SOLR_VERSION := ${{ matrix.solr-version }}#" Makefile
-      - run: make bootstrap
+      - run: make download-solr
 
       # test
       - name: test
