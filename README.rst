@@ -1,5 +1,5 @@
-.. image:: https://travis-ci.org/kitconcept/pytest-solr.svg?branch=master
-    :target: https://travis-ci.org/kitconcept/pytest-solr
+.. image:: https://github.com/kitconcept/pytest-solr/actions/workflows/tests.yml/badge.svg
+    :target: https://github.com/kitconcept/pytest-solr/actions/workflows/tests.yml
 
 .. image:: https://img.shields.io/pypi/v/pytest-solr.svg
     :target: https://pypi.python.org/pypi/pytest-solr/
