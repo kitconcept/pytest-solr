@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<schema name="suffix_search" version="1.5">
+
+  <uniqueKey>id</uniqueKey>
+
+  <types>
+    <fieldType name="string" class="solr.StrField" />
+
+    <!-- text_suffix field type:
+
+      stores all possible suffixes of a given term
+
+      example:
+
+        term "bananas" stores: ananas, nanas, anas, nas, as
+
+      source:
+
+        http://blog.florian-hopf.de/2014/03/prefix-and-suffix-matches-in-solr.html
+    -->
+    <fieldType name="text_suffix" class="solr.TextField" positionIncrementGap="100">
+      <analyzer type="index">
+        <!-- lower case: Bananas -> bananas -->
+        <tokenizer class="solr.LowerCaseTokenizerFactory" />
+        <!-- reverse: bananas -> sananab -->
+        <filter class="solr.ReverseStringFilterFactory" />
+        <!-- create ngrams: sananab -> sa/san/sana/sanan/sanana/sananab -->
+        <filter class="solr.EdgeNGramFilterFactory" minGramSize="3" maxGramSize="15" />
+        <!-- reverse the reverse ngram: as/nas/anas/nanas/bananas -->
+        <filter class="solr.ReverseStringFilterFactory" />
+      </analyzer>
+      <analyzer type="query">
+        <!-- lower case: Ananas -> ananas -->
+        <tokenizer class="solr.LowerCaseTokenizerFactory" />
+      </analyzer>
+    </fieldType>
+  </types>
+
+  <fields>
+    <field name="id" type="string" indexed="true" stored="true" required="true" />
+    <field name="suffix" type="text_suffix" indexed="true" stored="true" />
+  </fields>
+
+</schema>

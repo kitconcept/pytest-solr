@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<schema name="prefix_search" version="1.5">
+
+  <uniqueKey>id</uniqueKey>
+
+  <types>
+    <fieldType name="string" class="solr.StrField" />
+
+    <!-- text_prefix field type:
+
+      stores all possible prefixes of a given term
+
+      example:
+
+        term "bananas" stores: ban, bana, banan, banana
+
+      source:
+
+        http://blog.florian-hopf.de/2014/03/prefix-and-prefix-matches-in-solr.html
+    -->
+    <fieldType name="text_prefix" class="solr.TextField" positionIncrementGap="100">
+      <analyzer type="index">
+        <!-- lower case: Bananas -> bananas -->
+        <tokenizer class="solr.LowerCaseTokenizerFactory" />
+        <!-- create ngrams: bananas -> ban, bana, banan, banana, bananas -->
+        <filter class="solr.EdgeNGramFilterFactory" minGramSize="3" maxGramSize="15" />
+      </analyzer>
+      <analyzer type="query">
+        <!-- lower case: Bana -> bana -->
+        <tokenizer class="solr.LowerCaseTokenizerFactory" />
+      </analyzer>
+    </fieldType>
+  </types>
+
+  <fields>
+    <field name="id" type="string" indexed="true" stored="true" required="true" />
+    <field name="prefix" type="text_prefix" indexed="true" stored="true" />
+  </fields>
+
+</schema>
