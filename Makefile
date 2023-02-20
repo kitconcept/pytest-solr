@@ -1,5 +1,5 @@
 SHELL := /bin/bash
-SOLR_VERSION := 7.7.3
+SOLR_VERSION := 8.11.2
 CURRENT_DIR:=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 
 all: download-solr virtualenv test
