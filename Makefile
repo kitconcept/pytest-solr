@@ -1,5 +1,5 @@
 SHELL := /bin/bash
-SOLR_VERSION := 9.1.1
+SOLR_VERSION := 8.11.2
 ifeq ($(SOLR_VERSION), 9.1.1)
     SOLR_DOWNLOAD_URL=https://www.apache.org/dyn/closer.lua/solr/solr/9.1.1/solr-9.1.1.tgz?action=download
 else
