@@ -10,7 +10,7 @@ def solr_process(
     host="localhost",
     port=18983,
     core="solr",
-    version="7.7.3",
+    version="8.11.2",
     timeout=60,
 ):
     @pytest.fixture(scope="session")

@@ -1,5 +1,10 @@
 SHELL := /bin/bash
-SOLR_VERSION := 7.7.3
+SOLR_VERSION := 8.11.2
+ifeq ($(SOLR_VERSION), 9.1.1)
+    SOLR_DOWNLOAD_URL=https://www.apache.org/dyn/closer.lua/solr/solr/9.1.1/solr-9.1.1.tgz?action=download
+else
+    SOLR_DOWNLOAD_URL=http://archive.apache.org/dist/lucene/solr/$(SOLR_VERSION)/solr-$(SOLR_VERSION).tgz
+endif
 CURRENT_DIR:=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 
 all: download-solr virtualenv test
@@ -7,7 +12,7 @@ all: download-solr virtualenv test
 download-solr:
 	@echo "Download Solr"
 	@if [[ ! -f $(CURRENT_DIR)/downloads/solr-$(SOLR_VERSION).tgz  ]]; then \
-		wget -P $(CURRENT_DIR)/downloads http://archive.apache.org/dist/lucene/solr/$(SOLR_VERSION)/solr-$(SOLR_VERSION).tgz; \
+		wget -O $(CURRENT_DIR)/downloads/solr-$(SOLR_VERSION).tgz $(SOLR_DOWNLOAD_URL); \
 	else \
 		echo "Skip downloading Solr."; \
 	fi;

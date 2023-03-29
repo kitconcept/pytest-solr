@@ -7,7 +7,7 @@ jobs:
       fail-fast: false
       matrix:
         python-version: ["3.8", "3.7"]
-        solr-version: ["8.11.0", "7.7.3", "7.4.0"]
+        solr-version: ["9.1.1", "8.11.2", "7.7.3", "7.4.0"]
 
     steps:
       # git checkout
@@ -43,8 +43,8 @@ jobs:
             ${{ runner.os }}-solr-
 
       # install Solr
-      - run: sed -ie "s#SOLR_VERSION := 7.7.3#SOLR_VERSION := ${{ matrix.solr-version }}#" Makefile
-      - run: sed -ie "s#7.7.3#${{ matrix.solr-version }}#" src/pytest_solr/factories.py
+      - run: sed -ie "s#SOLR_VERSION := 8.11.2#SOLR_VERSION := ${{ matrix.solr-version }}#" Makefile
+      - run: sed -ie "s#8.11.2#${{ matrix.solr-version }}#" src/pytest_solr/factories.py
       - run: make download-solr
 
       # test
