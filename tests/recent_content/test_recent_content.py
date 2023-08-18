@@ -15,9 +15,9 @@ def test_recent_content_default_order(solr):
     assert ['1','2'] == [x['id'] for x in result.raw_response['response']['docs']]
 
 def test_recent_content_rank_newer_content_first(solr):
-    solr.add([{'id': '1', 'title': 'bananas', 'effective': '1990/12/31 00:00:00 UTC'}])
-    solr.add([{'id': '2', 'title': 'bananas', 'effective': '2020/12/31 00:00:00 UTC'}])
-    solr.add([{'id': '3', 'title': 'bananas', 'effective': '2023/01/01 00:00:00 UTC'}])
+    solr.add([{'id': '1', 'title': 'bananas', 'effective': '1990-02-23T17:20:00Z'}])
+    solr.add([{'id': '2', 'title': 'bananas', 'effective': '2020-02-23T17:20:00Z'}])
+    solr.add([{'id': '3', 'title': 'bananas', 'effective': '2023-02-23T17:20:00Z'}])
     query = 'title:bananas AND _val_:"recip(rord(effective),1,5,1)"'
     result = json.loads(solr._select(params={"q": query, "wt": "json", "fl": "id,title,effective,recip(rord(effective),1,5,1)"}))
     assert 3 == result['response']['numFound']
@@ -30,3 +30,12 @@ def test_recent_content_rank_newer_content_first(solr):
     # id=1 -> 1.6666666
     # id=2 -> 2.5
     # id=3 -> 5.0
+
+def test_newer_content_trumps_term_in_title_twice(solr):
+    solr.add([{'id': '1', 'title': 'bananas', 'effective': '2023-02-23T17:20:00Z'}])
+    solr.add([{'id': '2', 'title': 'bananas bananas', 'effective': '2015-02-23T17:20:00Z'}])
+    query = 'title:bananas AND _val_:"recip(rord(effective),1,5,1)"'
+    result = json.loads(solr._select(params={"q": query, "wt": "json", "fl": "id,title,effective,recip(rord(effective),1,5,1)"}))
+    assert 2 == result['response']['numFound']
+    assert ['1', '2'] == [x['id'] for x in result['response']['docs']]
+    # assert [5.0, 2.5, 1.6666666] == [x['recip(rord(effective),1,5,1)'] for x in result['response']['docs']]
