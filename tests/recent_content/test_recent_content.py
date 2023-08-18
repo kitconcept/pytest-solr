@@ -38,4 +38,4 @@ def test_newer_content_trumps_term_in_title_twice(solr):
     result = json.loads(solr._select(params={"q": query, "wt": "json", "fl": "id,title,effective,recip(rord(effective),1,5,1)"}))
     assert 2 == result['response']['numFound']
     assert ['1', '2'] == [x['id'] for x in result['response']['docs']]
-    # assert [5.0, 2.5, 1.6666666] == [x['recip(rord(effective),1,5,1)'] for x in result['response']['docs']]
+    assert [5.0, 2.5] == [x['recip(rord(effective),1,5,1)'] for x in result['response']['docs']]
